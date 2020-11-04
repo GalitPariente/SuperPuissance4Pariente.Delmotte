@@ -15,10 +15,10 @@ public class Puissance4_PARIENTE {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-  
-        // TODO code application logic here
-   
+        System.out.println("Bienvenue dans le jeu Puissance 4");
+        Partie unePartie = new Partie();
+        unePartie.debuterPartie();
+
     }
-    
-    
+
 }
