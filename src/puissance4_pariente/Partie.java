@@ -34,8 +34,8 @@ public void initialiserPartie(){
     System.out.println(Joueur2.Nom + "possède les jetons de couleur " + Joueur2.Couleur);
     
     for (int i=0; i<21; i++){
-        Jeton unJeton = new Jeton(ListeJoueurs[0].Couleur);
-        Joueur1.ajouter_Jeton(unJeton);
+        Jeton Jeton = new Jeton(ListeJoueurs[0].Couleur);
+        Joueur1.ajouter_Jeton(Jeton);
         Jeton AutreJeton = new Jeton(ListeJoueurs[1].Couleur);
         Joueur2.ajouter_Jeton(AutreJeton);
     }
@@ -70,7 +70,7 @@ public void attribuerCouleursAuxJoueurs(){
     }
 }
 
-public Joueur CouleurSuivante (Joueur Un_Nom){
+public Joueur CouleurApres (Joueur Un_Nom){
     if (ListeJoueurs[0] == joueurCourant){
         return ListeJoueurs[1];
     }
