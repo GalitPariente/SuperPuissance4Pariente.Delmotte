@@ -1,62 +1,61 @@
 package puissance4_pariente;
 
 /*
-Pariente Galit 
-Super puisssance 4 
-TP3
+TP SUPER PUISSANCE 4
+TDB
+PARIENTE Galit et DELMOTTE Lucas 
  */
-import java.util.Random;
 /**
  *
  * @author Pariente Galit
  */
 public class Joueur {
-String Nom;
-String Couleur;
-Jeton ListeJetons[] = new Jeton [21];
-int nombreDesintegrateurs;
-int nombreJetonsRestants;
-    //les attributs
-    
-    Joueur (String Un_Nom){
-        Nom = Un_Nom;
-        nombreDesintegrateurs = 0;
-        nombreJetonsRestants = 0;
-        
-        String Une_Couleur[] = {"Jaune","Rouge"};
-        Random generateurAleatoire = new Random();
-        int m = generateurAleatoire.nextInt(1);
-        Couleur= Une_Couleur [m];
-        //On a construit notre classe       
-                        
-    }
-    void ajouter_Jeton (Jeton Jeton_a_ajouter){
-        ListeJetons [nombreJetonsRestants ++] = Jeton_a_ajouter;
-        
-    }
-        Jeton recupererJeton (){
-            nombreJetonsRestants -- ;
-            return ListeJetons[nombreJetonsRestants] ;
-        }
-    
-        void obtenirDesintegrateur(){
-            nombreDesintegrateurs += 1 ;
-        }
-        
-        boolean utiliserDesintegrateur (){
-            if (nombreDesintegrateurs == 0) {
-                return false ;
-            } else {
-                nombreDesintegrateurs -- ;
-                return true ;
-            }
-        }
-        
-        @Override
-        public String toString() {
-            String lireCouleur ;
-            lireCouleur = "La couleur du joueur est " +Couleur;
-            return lireCouleur ; 
-        } 
-}
 
+    //Attributs
+    String Nom;
+    String Couleur;
+    Jeton ListeJetons[] = new Jeton[21];
+    int nombreJetons;
+    int NombreDesintegrateurs;
+
+    public Joueur(String UnNom) {
+        //Constructeur 
+        Nom = UnNom;
+        nombreJetons = 0;
+        NombreDesintegrateurs = 0;
+
+    }
+
+    //Affectation de la couleur en parametre au joueur 
+    public void affecterCouleur(String uneCouleur) {
+        Couleur = uneCouleur;
+    }
+
+    //Retirer un jeton dans la liste du joueur 
+    public Jeton enlever_Jeton() {
+        nombreJetons = nombreJetons - 1;
+        return ListeJetons[nombreJetons];
+    }
+
+    public void ajouter_Jeton(Jeton unJeton) {
+        ListeJetons[nombreJetons++] = unJeton;
+    }
+
+    //Incrémente le nombre de desintegrateur 
+    public void obtenir_Desintegrateurs() {
+        NombreDesintegrateurs++;
+        System.out.println("Vous venez de remporter un désintégrateur");//Message au joueur 
+    }
+
+    public boolean utiliser_Desintegrateur() {
+        boolean res; //Création variable résultat
+        if (NombreDesintegrateurs == 0) { //Verification que le joueur a bien un ou plusieurs desintegrateurs 
+            res = false; //Si non ->faux
+        } else {
+            NombreDesintegrateurs--;
+            res = true; //Retourne vraie
+        }
+        System.out.print("Vous avez " + NombreDesintegrateurs + " désintégrateurs"); //Message pour dire au joueur son nombre de desintegrateur 
+        return res; //Renvoie du résultat
+    }
+}

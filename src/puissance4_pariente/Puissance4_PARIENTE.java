@@ -10,15 +10,12 @@ package puissance4_pariente;
  * @author Pariente Galit
  */
 public class Puissance4_PARIENTE {
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        System.out.println("Bienvenue dans le jeu Puissance 4");
-        Partie unePartie = new Partie();
-        unePartie.debuterPartie();
-
+        System.out.println("BIENVENUE DANS LE SUPER PUISSANCE 4");
+        Partie unePartie = new Partie(); //Création de la partie
+        unePartie.debuterPartie(); //Lancement de la partie
+        
+                
     }
-
+    
 }
