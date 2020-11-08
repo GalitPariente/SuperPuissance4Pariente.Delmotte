@@ -92,12 +92,12 @@ public class Partie {
             Random rand1 = new Random();
             nbAleatoireA = rand1.nextInt(6);
             nbAleatoireB = rand1.nextInt(7);
-            while (Grillejeu.Cellules[nbAleatoireA][nbAleatoireB].presenceTrouNoir() == true) {
+            while (Grillejeu.Cellules[nbAleatoireA][nbAleatoireB].presence_TrouNoir() == true) {
 
                 nbAleatoireA = rand1.nextInt(6);
                 nbAleatoireB = rand1.nextInt(7);
             }
-            if (Grillejeu.Cellules[nbAleatoireA][nbAleatoireB].presenceTrouNoir() == false) {
+            if (Grillejeu.Cellules[nbAleatoireA][nbAleatoireB].presence_TrouNoir() == false) {
 
                 Grillejeu.placerTrouNoir(nbAleatoireA, nbAleatoireB);
                 Grillejeu.placerDesintegrateur(nbAleatoireA, nbAleatoireB);
@@ -110,11 +110,11 @@ public class Partie {
             Random rand2 = new Random();
             nbAleatoire1 = rand2.nextInt(6);
             nbAleatoire2 = rand2.nextInt(7);
-            while (Grillejeu.Cellules[nbAleatoire1][nbAleatoire2].presenceTrouNoir() == true) {
+            while (Grillejeu.Cellules[nbAleatoire1][nbAleatoire2].presence_TrouNoir() == true) {
                 nbAleatoire1 = rand2.nextInt(6);
                 nbAleatoire2 = rand2.nextInt(7);
             }
-            if (Grillejeu.Cellules[nbAleatoire1][nbAleatoire2].presenceTrouNoir() == false) {
+            if (Grillejeu.Cellules[nbAleatoire1][nbAleatoire2].presence_TrouNoir() == false) {
                 Grillejeu.placerTrouNoir(nbAleatoire1, nbAleatoire2);
             }
         }
@@ -125,11 +125,11 @@ public class Partie {
             Random rand3 = new Random();
             nbAleatoire1 = rand3.nextInt(6);
             nbAleatoire2 = rand3.nextInt(7);
-            while (Grillejeu.Cellules[nbAleatoire1][nbAleatoire2].presenceTrouNoir() == true) {
+            while (Grillejeu.Cellules[nbAleatoire1][nbAleatoire2].presence_TrouNoir() == true) {
                 nbAleatoire1 = rand3.nextInt(6);
                 nbAleatoire2 = rand3.nextInt(7);
             }
-            if (Grillejeu.Cellules[nbAleatoire1][nbAleatoire2].presenceTrouNoir() == false) {
+            if (Grillejeu.Cellules[nbAleatoire1][nbAleatoire2].presence_TrouNoir() == false) {
                 Grillejeu.placerDesintegrateur(nbAleatoire1, nbAleatoire2);
             }
         }
@@ -161,7 +161,7 @@ public class Partie {
         //pour choisir la colonnes
         Scanner sc;
         sc = new Scanner(System.in);
-        if (joueurCourant.nombreJetons > 0) { //les jetons restants au joueur
+        if (joueurCourant.nombreJetonsRestants > 0) { //les jetons restants au joueur
             System.out.println("Saisir une colonne  : ");
             int j = sc.nextInt() - 1; //choix valide ou non 
             while (j > 7 || j < 0) {
@@ -200,7 +200,7 @@ public class Partie {
             j = sc.nextInt() - 1;
         }
         //Verifions que le jeton est bien celui du joueur 
-        if ((Grillejeu.Cellules[i][j].lireCouleurDuJeton().equals(joueurCourant.Couleur)) && Grillejeu.caseOccupee(i, j) == true) {
+        if ((Grillejeu.Cellules[i][j].lireCouleur_Jeton().equals(joueurCourant.Couleur)) && Grillejeu.caseOccupee(i, j) == true) {
             joueurCourant.ajouter_Jeton(Grillejeu.recupererJeton(i, j));
             //On tasse la grille
             Grillejeu.tasserGrille(j);

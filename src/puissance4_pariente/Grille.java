@@ -11,19 +11,19 @@ PARIENTE Galit et DELMOTTE Lucas
  */
 public class Grille {
 
-    Cellule[][] Cellules = new Cellule[6][7];
-
+    Cellule[][] Cellules = new Cellule[6][7];//La cellule [0][0] est en bas a gauche 
+//On initialise la grille avec 42 cellules vides 
     Grille() {
         //Constructeur
-        for (int i = 0; i < 6; i++) {
-            for (int j = 0; j < 7; j++) {
-                Cellules[i][j] = new Cellule();//i indice colonne et j indice ligne 
+        for (int i = 0; i < 6; i++) {//i pour les lignes 
+            for (int j = 0; j < 7; j++) {//j pour les colonnes 
+                Cellules[i][j] = new Cellule(); 
             }
         }
     }
 
-    public boolean colonneRemplie(int i) {//Pour savoir si une colonne est remplie ou non 
-        if (Cellules[5][i].JetonCourant != null) { //Derniere ligne i-eme colonne 
+    public boolean colonneRemplie(int i) {//Pour savoir si une colonne est remplie ou non i=indice colonne 
+        if (Cellules[5][i].JetonCourant != null) {
             return true; //vrai si remplie 
         } else {
             return false; //Faux  si pas remplie 
@@ -33,7 +33,7 @@ public class Grille {
     public boolean ajouterJetonDansColonne(Joueur unJoueur, int i) { //Pour ajouter un jeton dans la colonne choisi
 
         int j = 0;
-        if (colonneRemplie(i) == true) { //Si la colonne est remplie
+        if (colonneRemplie(i) == true) { //Si la colonne est remplie on s'arrete et on retourne false 
             return false;//car on ne peut plus ajouter de jeton 
         } else { //Sinon
             while (Cellules[j][i].JetonCourant != null) { //On monte de ligne en ligne en partant du bas pour trouver une cellule vide 
@@ -44,13 +44,13 @@ public class Grille {
             Cellules[j][i].JetonCourant = unJeton;
 
             //Verifier si il y a un trou noir 
-            if (Cellules[j][i].presenceTrouNoir() == true) {
-                Cellules[j][i].activerTrouNoir();
+            if (Cellules[j][i].presence_TrouNoir() == true) {
+                Cellules[j][i].activer_TrouNoir();
             }
 
             //Idem pour desintegrateur 
-            if (Cellules[j][i].presenceDesintegrateur() == true) {
-                Cellules[j][i].recupererDesintegrateur();
+            if (Cellules[j][i].presence_Desintegrateur() == true) {
+                Cellules[j][i].recuperer_Desintegrateur();
                 unJoueur.obtenir_Desintegrateurs();
 
             }
@@ -87,18 +87,18 @@ public class Grille {
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 7; j++) {
                 if (Cellules[i][j].JetonCourant == null) {
-                    if (Cellules[i][j].presenceTrouNoir() == true) {
+                    if (Cellules[i][j].presence_TrouNoir() == true) {
                         Cellules3[i][j] = " T "; //la cellule prend la valeur T
-                    } else if (Cellules[i][j].presenceDesintegrateur() == true) {
+                    } else if (Cellules[i][j].presence_Desintegrateur() == true) {
                         Cellules3[i][j] = " D "; //la cellule prend la valeur D
                     } else {
                         Cellules3[i][j] = " N "; //On affiche un N si la case est Non remplie 
                     }  
                 } else { //Pour affiche J ou R en fonction de la couleur atribuer au joueur 
-                    if (Cellules[i][j].lireCouleurDuJeton().equals("Jaune")) {
+                    if (Cellules[i][j].lireCouleur_Jeton().equals("Jaune")) {
                         Cellules3[i][j] = " J ";
                     }
-                    if (Cellules[i][j].lireCouleurDuJeton().equals("Rouge")) {
+                    if (Cellules[i][j].lireCouleur_Jeton().equals("Rouge")) {
                         Cellules3[i][j] = " R ";
                     }
                 }
@@ -141,7 +141,7 @@ public class Grille {
         for (int j = 0; j < 7; j++) {
             int nb_alignés = 0;//Compteur 
             for (int i = 0; i < 6; i++) {
-                if (Cellules[i][j].lireCouleurDuJeton().equals(CouleurDuJoueur)) {
+                if (Cellules[i][j].lireCouleur_Jeton().equals(CouleurDuJoueur)) {
                     nb_alignés = nb_alignés + 1;//Incremente le compteur a chaque trouvaille d'un jeton 
                 } else {
                     nb_alignés = 0;
@@ -156,7 +156,7 @@ public class Grille {
         for (int i = 0; i < 6; i++) {
             int nb_alignés = 0; //Compteur 
             for (int j = 0; j < 7; j++) {
-                if (Cellules[i][j].lireCouleurDuJeton().equals(CouleurDuJoueur)) {
+                if (Cellules[i][j].lireCouleur_Jeton().equals(CouleurDuJoueur)) {
                     nb_alignés = nb_alignés + 1; //Incrémenter le compteur a chaque trouvaille d'un jeton 
                 } else {//SINON 
                     nb_alignés = 0;
@@ -170,12 +170,12 @@ public class Grille {
         //Pour les diagonales :
 
         //Premierement diagonales montantes:
-        for (int i = 0; i < 3; i++) { // rectangle par les 3 premières lignes et 4 premières colonnes
+         for (int i = 0; i < 3; i++) { // rectangle par les 3 premières lignes et 4 premières colonnes
             int nb_alignés = 0; //Compteur
             for (int j = 0; j < 4; j++) { //Case a case
-                if (Cellules[i][j].lireCouleurDuJeton().equals(CouleurDuJoueur)) {
+                if (Cellules[i][j].lireCouleur_Jeton().equals(CouleurDuJoueur)) {
                     nb_alignés = 1; //Incrementation du compteur si jeton au joueur 
-                    while (Cellules[i + 1][j + 1].lireCouleurDuJeton().equals(CouleurDuJoueur) && nb_alignés != 4) {
+                    while (Cellules[i + 1][j + 1].lireCouleur_Jeton().equals(CouleurDuJoueur) && nb_alignés != 4) {
 
                         nb_alignés = nb_alignés + 1; //incrementation
                         if (nb_alignés == 4) {
@@ -196,9 +196,9 @@ public class Grille {
 
             int nb_alignés = 0;
             for (int j = 0; j < 4; j++) {
-                if (Cellules[i][j].lireCouleurDuJeton().equals(CouleurDuJoueur)) {
+                if (Cellules[i][j].lireCouleur_Jeton().equals(CouleurDuJoueur)) {
                     nb_alignés = 1;
-                    while (Cellules[i - 1][j + 1].lireCouleurDuJeton().equals(CouleurDuJoueur) && nb_alignés != 4) {
+                    while (Cellules[i - 1][j + 1].lireCouleur_Jeton().equals(CouleurDuJoueur) && nb_alignés != 4) {
 
                         nb_alignés = nb_alignés + 1;
 
@@ -234,20 +234,20 @@ public class Grille {
 
     //Pour placer un desintegrateur 
     public boolean placerDesintegrateur(int i, int j) {
-        if (Cellules[i][j].presenceDesintegrateur() == true) {
+        if (Cellules[i][j].presence_Desintegrateur() == true) {
             return false;
         } else {
-            Cellules[i][j].placerDesintegrateur();
+            Cellules[i][j].placer_Desintegrateur();
             return true;
         }
     }
 
     //Pour permettre de placer un trou noir dans la grille
     public boolean placerTrouNoir(int i, int j) {
-        if (Cellules[i][j].presenceTrouNoir() == true) { //Si la cellule a un trou noir
+        if (Cellules[i][j].presence_TrouNoir() == true) { //Si la cellule a un trou noir
             return false; //faux car on ne peut pas en mettre 2
         } else { //Sinon 
-            Cellules[i][j].placerTrouNoir();
+            Cellules[i][j].placer_TrouNoir();
             return true;//Vrai 
         }
     }
@@ -255,15 +255,15 @@ public class Grille {
     //Supprimer le jeton 
     public boolean supprimerJeton(int i, int j) {
         boolean res;
-        res = Cellules[i][j].supprimerJeton();
+        res = Cellules[i][j].supprimer_Jeton();
         return res;
     }
 
     //Recupèrer le jeton 
     public Jeton recupererJeton(int i, int j) {
         Jeton res;
-        res = Cellules[i][j].recupererJeton(); //recuperer le jeton
-        Cellules[i][j].supprimerJeton();//le supprimer dans la cellule
+        res = Cellules[i][j].recuperer_Jeton(); //recuperer le jeton
+        Cellules[i][j].supprimer_Jeton();//le supprimer dans la cellule
         return res;//renvoie le résultat(res)
     }
 

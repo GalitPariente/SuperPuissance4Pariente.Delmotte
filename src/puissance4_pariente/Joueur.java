@@ -15,13 +15,13 @@ public class Joueur {
     String Nom;
     String Couleur;
     Jeton ListeJetons[] = new Jeton[21];
-    int nombreJetons;
+    int nombreJetonsRestants;
     int NombreDesintegrateurs;
 
     public Joueur(String UnNom) {
         //Constructeur 
         Nom = UnNom;
-        nombreJetons = 0;
+        nombreJetonsRestants = 0;
         NombreDesintegrateurs = 0;
 
     }
@@ -33,12 +33,12 @@ public class Joueur {
 
     //Retirer un jeton dans la liste du joueur 
     public Jeton enlever_Jeton() {
-        nombreJetons = nombreJetons - 1;
-        return ListeJetons[nombreJetons];
+        nombreJetonsRestants = nombreJetonsRestants - 1;
+        return ListeJetons[nombreJetonsRestants];
     }
 
     public void ajouter_Jeton(Jeton unJeton) {
-        ListeJetons[nombreJetons++] = unJeton;
+        ListeJetons[nombreJetonsRestants++] = unJeton;
     }
 
     //Incrémente le nombre de desintegrateur 

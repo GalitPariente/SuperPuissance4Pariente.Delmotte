@@ -23,5 +23,10 @@ public class Jeton {
     public String LireCouleur() {
         return couleur;
     }
-
+public String toString(){
+    String LireCouleur;
+    LireCouleur = "La couleur du joueur est"+couleur;
+    return LireCouleur ;//Fonction qui doit retourner quelque chose 
 }
+}
+
