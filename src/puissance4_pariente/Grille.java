@@ -169,13 +169,13 @@ public class Grille {
         }
         //Pour les diagonales :
 
-        //Premierement diagonales montantes:
+         //Premierement diagonales en montee :
          for (int i = 0; i < 3; i++) { // rectangle par les 3 premières lignes et 4 premières colonnes
             int nb_alignés = 0; //Compteur
             for (int j = 0; j < 4; j++) { //Case a case
                 if (Cellules[i][j].lireCouleur_Jeton().equals(CouleurDuJoueur)) {
                     nb_alignés = 1; //Incrementation du compteur si jeton au joueur 
-                    while (Cellules[i + 1][j + 1].lireCouleur_Jeton().equals(CouleurDuJoueur) && nb_alignés != 4) {
+                    while (Cellules[j + 1][i + 1].lireCouleur_Jeton().equals(CouleurDuJoueur) && nb_alignés != 4) {
 
                         nb_alignés = nb_alignés + 1; //incrementation
                         if (nb_alignés == 4) {
@@ -189,8 +189,9 @@ public class Grille {
                     }
                 }
             }
-        }
-        //Deuxiemement diagonales descendantes , meme raisonnement qu'au dessus 
+        }//Probleme ici 
+       
+         //Deuxiemement diagonales en descente , meme raisonnement qu'au dessus 
 
         for (int i = 3; i < 6; i++) {
 
@@ -222,7 +223,7 @@ public class Grille {
     }
 
 //Pour permettre  de tasser la grille
-    public void tasserGrille(int i) {
+    public void tasser_Grille(int i) {
 
         for (int j = 0; j < 6; j++) {
             if (Cellules[j][i] == null) { //chercher une cellule non remplie 
@@ -233,7 +234,7 @@ public class Grille {
     }
 
     //Pour placer un desintegrateur 
-    public boolean placerDesintegrateur(int i, int j) {
+    public boolean placer_Desintegrateur(int i, int j) {
         if (Cellules[i][j].presence_Desintegrateur() == true) {
             return false;
         } else {
@@ -243,7 +244,7 @@ public class Grille {
     }
 
     //Pour permettre de placer un trou noir dans la grille
-    public boolean placerTrouNoir(int i, int j) {
+    public boolean placer_TrouNoir(int i, int j) {
         if (Cellules[i][j].presence_TrouNoir() == true) { //Si la cellule a un trou noir
             return false; //faux car on ne peut pas en mettre 2
         } else { //Sinon 
@@ -253,14 +254,14 @@ public class Grille {
     }
 
     //Supprimer le jeton 
-    public boolean supprimerJeton(int i, int j) {
+    public boolean supprimer_Jeton(int i, int j) {
         boolean res;
         res = Cellules[i][j].supprimer_Jeton();
         return res;
     }
 
     //Recupèrer le jeton 
-    public Jeton recupererJeton(int i, int j) {
+    public Jeton recuperer_Jeton(int i, int j) {
         Jeton res;
         res = Cellules[i][j].recuperer_Jeton(); //recuperer le jeton
         Cellules[i][j].supprimer_Jeton();//le supprimer dans la cellule

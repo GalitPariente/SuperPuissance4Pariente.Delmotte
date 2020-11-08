@@ -1,7 +1,5 @@
 package puissance4_pariente;
 
-
-
 /*
 TP SUPER PUISSANCE 4 
 TDB
@@ -99,38 +97,38 @@ public class Partie {
             }
             if (Grillejeu.Cellules[nbAleatoireA][nbAleatoireB].presence_TrouNoir() == false) {
 
-                Grillejeu.placerTrouNoir(nbAleatoireA, nbAleatoireB);
-                Grillejeu.placerDesintegrateur(nbAleatoireA, nbAleatoireB);
+                Grillejeu.placer_TrouNoir(nbAleatoireA, nbAleatoireB);
+                Grillejeu.placer_Desintegrateur(nbAleatoireA, nbAleatoireB);
             }
 
         }
         //Meme principe pour les 3 trous noirs restants
         for (int i = 0; i < 3; i++) {
-            int nbAleatoire1, nbAleatoire2;
+            int nbAleatoireA, nbAleatoireB;
             Random rand2 = new Random();
-            nbAleatoire1 = rand2.nextInt(6);
-            nbAleatoire2 = rand2.nextInt(7);
-            while (Grillejeu.Cellules[nbAleatoire1][nbAleatoire2].presence_TrouNoir() == true) {
-                nbAleatoire1 = rand2.nextInt(6);
-                nbAleatoire2 = rand2.nextInt(7);
+            nbAleatoireA = rand2.nextInt(6);
+            nbAleatoireB = rand2.nextInt(7);
+            while (Grillejeu.Cellules[nbAleatoireA][nbAleatoireB].presence_TrouNoir() == true) {
+                nbAleatoireA = rand2.nextInt(6);
+                nbAleatoireB = rand2.nextInt(7);
             }
-            if (Grillejeu.Cellules[nbAleatoire1][nbAleatoire2].presence_TrouNoir() == false) {
-                Grillejeu.placerTrouNoir(nbAleatoire1, nbAleatoire2);
+            if (Grillejeu.Cellules[nbAleatoireA][nbAleatoireB].presence_TrouNoir() == false) {
+                Grillejeu.placer_TrouNoir(nbAleatoireA, nbAleatoireB);
             }
         }
 
         //Maintenant pour les desintegrateurs 
         for (int i = 0; i < 3; i++) {
-            int nbAleatoire1, nbAleatoire2;
+            int nbAleatoireA, nbAleatoireB;
             Random rand3 = new Random();
-            nbAleatoire1 = rand3.nextInt(6);
-            nbAleatoire2 = rand3.nextInt(7);
-            while (Grillejeu.Cellules[nbAleatoire1][nbAleatoire2].presence_TrouNoir() == true) {
-                nbAleatoire1 = rand3.nextInt(6);
-                nbAleatoire2 = rand3.nextInt(7);
+            nbAleatoireA = rand3.nextInt(6);
+            nbAleatoireB = rand3.nextInt(7);
+            while (Grillejeu.Cellules[nbAleatoireA][nbAleatoireB].presence_TrouNoir() == true) {
+                nbAleatoireA = rand3.nextInt(6);
+                nbAleatoireB = rand3.nextInt(7);
             }
-            if (Grillejeu.Cellules[nbAleatoire1][nbAleatoire2].presence_TrouNoir() == false) {
-                Grillejeu.placerDesintegrateur(nbAleatoire1, nbAleatoire2);
+            if (Grillejeu.Cellules[nbAleatoireA][nbAleatoireB].presence_TrouNoir() == false) {
+                Grillejeu.placer_Desintegrateur(nbAleatoireA, nbAleatoireB);
             }
         }
 
@@ -147,7 +145,7 @@ public class Partie {
         sc = new Scanner(System.in);
         System.out.println("1 : POSER un jeton");
         System.out.println("2 : UTILISER un desintegrateur");
-        System.out.println("3 : RECUPERE jeton");
+        System.out.println("3 : RECUPERER jeton");
         rep = sc.nextInt();
         //Possibilite du choix 
         while (rep > 3 || rep < 1) {
@@ -157,7 +155,7 @@ public class Partie {
         return rep; //Retourne la réponse: rep 
     }
 
-    public void poserJeton() {
+    public void poser_Jeton() {
         //pour choisir la colonnes
         Scanner sc;
         sc = new Scanner(System.in);
@@ -175,11 +173,11 @@ public class Partie {
             }
             Grillejeu.afficherGrilleSurConsole(); //On affiche la grille après l'ajout du jeton 
         } else {
-            System.out.println("Plus de jetons en votre possession");
+            System.out.println("Plus aucun jetons en votre possession");
         }
     }
 
-    public boolean recupererJeton() {
+    public boolean recuperer_Jeton() {
         boolean res;
         //On demande quel jeton le joueur veut récupérer 
         Scanner sc;
@@ -201,9 +199,9 @@ public class Partie {
         }
         //Verifions que le jeton est bien celui du joueur 
         if ((Grillejeu.Cellules[i][j].lireCouleur_Jeton().equals(joueurCourant.Couleur)) && Grillejeu.caseOccupee(i, j) == true) {
-            joueurCourant.ajouter_Jeton(Grillejeu.recupererJeton(i, j));
+            joueurCourant.ajouter_Jeton(Grillejeu.recuperer_Jeton(i, j));
             //On tasse la grille
-            Grillejeu.tasserGrille(j);
+            Grillejeu.tasser_Grille(j);
             res = true;
         } else {
             System.out.println("Erreur, Case vide ou jeton qui n'est pas le votre");
@@ -214,7 +212,7 @@ public class Partie {
         return res;
     }
 
-    public boolean activerDesintegrateur() {
+    public boolean activer_Desintegrateur() {
 
         boolean res;
         if (joueurCourant.NombreDesintegrateurs == 0) {
@@ -241,7 +239,7 @@ public class Partie {
                 j = sc.nextInt() - 1;
             }
             //Apres verification on supprime le jeton 
-            while (Grillejeu.supprimerJeton(i, j) == false) {
+            while (Grillejeu.supprimer_Jeton(i, j) == false) {
 
                 System.out.println("Choix impossible.Veuillez choisir une autre case : ");
                 System.out.println("Choix de ligne : ");
@@ -260,7 +258,7 @@ public class Partie {
                 }
             }
 
-            Grillejeu.tasserGrille(j);
+            Grillejeu.tasser_Grille(j);
             //Maintenant qu'on a supprimer le jeton on tasse la grille 
 
             joueurCourant.utiliser_Desintegrateur();
@@ -271,7 +269,7 @@ public class Partie {
         return res;
     }
 
-    public Joueur changementJoueur(Joueur unJoueur) {
+    public Joueur changement_Joueur(Joueur unJoueur) {
 //Permet le changement de joueur après chaque tour
         if (ListeJoueurs[0] == joueurCourant) {
             return ListeJoueurs[1];
@@ -289,35 +287,34 @@ public class Partie {
             rep = menu(); //Fonction menu
             switch (rep) {
                 case 1:
-                    poserJeton();
+                    poser_Jeton();
                     break;//arret
                 case 2:
                     boolean res; //resultat
-                    res = activerDesintegrateur();
+                    res = activer_Desintegrateur();
                     if (res == false) { //Le joueur peut rejouer
-                        joueurCourant = changementJoueur(joueurCourant);
+                        joueurCourant = changement_Joueur(joueurCourant);
                     }
                     break;
                 case 3: //meme principe
                     boolean res2;
-                    res2 = recupererJeton();
+                    res2 = recuperer_Jeton();
                     if (res2 == false) {
-                        joueurCourant = changementJoueur(joueurCourant);
+                        joueurCourant = changement_Joueur(joueurCourant);
                     }
                     break;
             }
 
-            joueurCourant = changementJoueur(joueurCourant);
+            joueurCourant = changement_Joueur(joueurCourant);
             System.out.println("C'est maintenant au tour de " + joueurCourant.Nom + " de jouer"); //Précise qui joue
         } while (rep <= 3 && Grillejeu.vainqueurJoueur(ListeJoueurs[0]) == false && Grillejeu.vainqueurJoueur(ListeJoueurs[1]) == false);
 
     }
 
-    //on lance la partie 
-    public void debuterPartie() {
+    //Pour lancer une nouvelle la partie 
+    public void debuter_Partie() {
         initialiserPartie();
         choix();
     }
 
 }
-

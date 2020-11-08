@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ TP SUPER PUISSANCE 4 
+TDB
+PARIENTE Galit et DELMOTTE Lucas 
  */
 package puissance4_pariente;
 
@@ -12,8 +12,8 @@ package puissance4_pariente;
 public class Puissance4_PARIENTE {
     public static void main(String[] args) {
         System.out.println("BIENVENUE DANS LE SUPER PUISSANCE 4");
-        Partie unePartie = new Partie(); //Création de la partie
-        unePartie.debuterPartie(); //Lancement de la partie
+        Partie nouvellePartie = new Partie(); //Création de la partie
+        nouvellePartie.debuter_Partie(); //Lancement de la partie
         
                 
     }
